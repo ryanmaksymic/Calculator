@@ -49,6 +49,13 @@ class Number
         // While the first operand has a useless decimal or trailing zero:
         while self.label.text!.characters.last == "." || (self.decimalUsed && self.label.text!.characters.last == "0")
         {
+            // If a decimal is about to be removed:
+            if self.label.text!.characters.last == "."
+            {
+                // Update decimalUsed:
+                self.decimalUsed = false
+            }
+            
             // Remove the first operand's last character:
             self.label.text = String(self.label.text!.characters.dropLast())
         }

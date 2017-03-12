@@ -277,7 +277,8 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
                                         <color key="textColor" red="1" green="0.95294117647058818" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
+                                        <color key="highlightedColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="+" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="750-pr-KYj">
                                         <rect key="frame" x="73" y="44" width="233" height="20"/>
@@ -317,24 +318,42 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="30"/>
                                         <color key="textColor" red="1" green="0.95294117647058818" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
+                                        <color key="highlightedColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.42352941176470588" green="0.58431372549019611" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.52156862745098043" green="0.65490196078431373" blue="0.76862745098039209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.53725490196078429" green="0.6470588235294118" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="allClearButton" destination="sUq-GX-oif" id="Fic-3S-6Kl"/>
-                        <outlet property="clearButton" destination="lUV-Lm-QUf" id="f8s-4O-6CH"/>
-                        <outlet property="decimalButton" destination="W2x-ZP-eRW" id="5Qx-2y-QDm"/>
-                        <outlet property="deleteButton" destination="juY-Se-lb4" id="xf0-BW-Xa3"/>
                         <outlet property="factLabel" destination="axY-Ke-7zs" id="FvU-lM-gGn"/>
                         <outlet property="firstOperandLabel" destination="vIu-83-MRs" id="XKF-qb-F2k"/>
                         <outlet property="operatorLabel" destination="750-pr-KYj" id="CZ5-5f-RYa"/>
                         <outlet property="resultLabel" destination="dlQ-qM-au1" id="meJ-pr-0wG"/>
                         <outlet property="secondOperandLabel" destination="Zfi-DF-JY0" id="Uax-0k-Mph"/>
+                        <outlet property="secondaryView" destination="Wf3-u5-jLE" id="jmd-I9-Iz2"/>
+                        <outlet property="tertiaryView" destination="vQS-ln-YsX" id="6ie-B8-eoJ"/>
+                        <outletCollection property="numberButtons" destination="dtc-fs-Dvz" collectionClass="NSMutableArray" id="v0f-RA-3cs"/>
+                        <outletCollection property="numberButtons" destination="n2c-bb-0Xu" collectionClass="NSMutableArray" id="Pjw-GN-Vpu"/>
+                        <outletCollection property="numberButtons" destination="tDX-dn-owG" collectionClass="NSMutableArray" id="edC-Fa-jdm"/>
+                        <outletCollection property="numberButtons" destination="8MH-lh-EDS" collectionClass="NSMutableArray" id="hwJ-IX-ba9"/>
+                        <outletCollection property="numberButtons" destination="JGx-e6-6Sp" collectionClass="NSMutableArray" id="wra-K4-XLg"/>
+                        <outletCollection property="numberButtons" destination="KdG-hZ-cYU" collectionClass="NSMutableArray" id="pdz-X2-qwP"/>
+                        <outletCollection property="numberButtons" destination="Zko-xf-sA5" collectionClass="NSMutableArray" id="fBJ-aM-Cxs"/>
+                        <outletCollection property="numberButtons" destination="a0Q-p7-3qu" collectionClass="NSMutableArray" id="P8u-JB-LcL"/>
+                        <outletCollection property="numberButtons" destination="qoY-S1-mGW" collectionClass="NSMutableArray" id="UmK-iy-DZe"/>
+                        <outletCollection property="numberButtons" destination="nky-OK-PuY" collectionClass="NSMutableArray" id="UnX-nV-iwv"/>
+                        <outletCollection property="numberButtons" destination="WFd-Wh-oEY" collectionClass="NSMutableArray" id="eEf-El-fei"/>
+                        <outletCollection property="numberButtons" destination="W2x-ZP-eRW" collectionClass="NSMutableArray" id="yEZ-mz-Nxv"/>
+                        <outletCollection property="operationButtons" destination="IVQ-6d-akj" collectionClass="NSMutableArray" id="4Q9-3E-po5"/>
+                        <outletCollection property="operationButtons" destination="BAP-Fi-OqE" collectionClass="NSMutableArray" id="UGD-Qr-NFe"/>
+                        <outletCollection property="operationButtons" destination="rjT-QT-w4K" collectionClass="NSMutableArray" id="d1F-nu-GD6"/>
+                        <outletCollection property="operationButtons" destination="Cle-nf-nyD" collectionClass="NSMutableArray" id="kV3-XU-pQv"/>
+                        <outletCollection property="operationButtons" destination="k1W-SY-CWB" collectionClass="NSMutableArray" id="nIZ-0z-YKK"/>
+                        <outletCollection property="editButtons" destination="sUq-GX-oif" collectionClass="NSMutableArray" id="MJC-vC-jBn"/>
+                        <outletCollection property="editButtons" destination="lUV-Lm-QUf" collectionClass="NSMutableArray" id="0RN-gB-5JK"/>
+                        <outletCollection property="editButtons" destination="juY-Se-lb4" collectionClass="NSMutableArray" id="75r-XQ-21L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -401,7 +420,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.42352941176470588" green="0.58431372549019611" blue="0.74901960784313726" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.53725490196078429" green="0.6470588235294118" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="factLabel" destination="OVf-v1-8jX" id="lZV-0s-Jal"/>
@@ -467,7 +486,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Theme" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hee-Hv-zFc">
-                                <rect key="frame" x="16" y="126" width="95" height="33"/>
+                                <rect key="frame" x="113" y="106" width="95" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -482,9 +501,56 @@
                                     <segue destination="flB-H1-Lxr" kind="unwind" identifier="unwindToMain" unwindAction="unwindToMainWithSegue:" id="L2q-qA-lg7"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XIx-ix-ux5">
+                                <rect key="frame" x="16" y="147" width="288" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Blue"/>
+                                    <segment title="Orange"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="0.95294117647058818" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="themeChanged:" destination="Er3-A3-iUK" eventType="valueChanged" id="izu-It-XHp"/>
+                                </connections>
+                            </segmentedControl>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHP-Eh-S4r">
+                                <rect key="frame" x="40" y="210" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Secondary Font Color" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X9r-Sz-u1l">
+                                        <rect key="frame" x="20" y="51" width="200" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KcK-Sw-sBC">
+                                <rect key="frame" x="40" y="337" width="240" height="59"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tertiary Font Color" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYM-7d-Yy2">
+                                        <rect key="frame" x="34" y="16" width="172" height="26"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.5" green="0.5" blue="0.75709783913565432" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.53725490196078429" green="0.6470588235294118" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="secondaryFontLabel" destination="X9r-Sz-u1l" id="ObG-5o-q7K"/>
+                        <outlet property="secondaryView" destination="dHP-Eh-S4r" id="4uV-0f-GGB"/>
+                        <outlet property="tertiaryFontLabel" destination="UYM-7d-Yy2" id="lDm-w6-KDo"/>
+                        <outlet property="tertiaryView" destination="KcK-Sw-sBC" id="S9j-ld-fMi"/>
+                        <outlet property="themeSelector" destination="XIx-ix-ux5" id="SbK-yT-G3w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y1n-Fq-j28" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="flB-H1-Lxr" userLabel="Exit" sceneMemberID="exit"/>

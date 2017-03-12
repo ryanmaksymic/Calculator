@@ -16,18 +16,21 @@ var context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
 
 class ViewController: UIViewController
 {
+    // Views:
+    @IBOutlet weak var secondaryView: UIView!
+    @IBOutlet weak var tertiaryView: UIView!
+    
     // Labels:
+    @IBOutlet weak var factLabel: UILabel!
     @IBOutlet weak var firstOperandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var secondOperandLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
-    @IBOutlet weak var factLabel: UILabel!
     
     // Buttons:
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var clearButton: UIButton!
-    @IBOutlet weak var allClearButton: UIButton!
-    @IBOutlet weak var decimalButton: UIButton!
+    @IBOutlet var numberButtons: [UIButton]!
+    @IBOutlet var operationButtons: [UIButton]!
+    @IBOutlet var editButtons: [UIButton]!
     
     // Number that is currently active:
     enum DisplayState { case FirstOperand, SecondOperand, Result }
@@ -74,12 +77,35 @@ class ViewController: UIViewController
         secondOperand = Number(withLabel: secondOperandLabel)
         result = Number(withLabel: resultLabel)
         
+        // If a theme selection is stored in permanent data:
+        if let theme = UserDefaults.standard.object(forKey: "theme") as? String
+        {
+            // Blue:
+            if theme == "Blue"
+            {
+                selectedThemeColors = blueThemeColors
+            }
+                // Orange:
+            else if theme == "Orange"
+            {
+                selectedThemeColors = orangeThemeColors
+            }
+        }
+            // Otherwise:
+        else
+        {
+            print("NO THEME SAVED")
+            
+            // Default to the Blue theme:
+            selectedThemeColors = blueThemeColors
+        }
+        
         // Clear the display:
         reset()
     }
     
-    // View did appear:
-    override func viewDidAppear(_ animated: Bool)
+    // View will appear:
+    override func viewWillAppear(_ animated: Bool)
     {
         // If a value was passed from History:
         if historyValue != ""
@@ -97,6 +123,29 @@ class ViewController: UIViewController
             // Clear historyValue:
             historyValue = ""
         }
+        
+        // Update view background colors:
+        view.backgroundColor = selectedThemeColors["primaryBackgroundColor"]
+        secondaryView.backgroundColor = selectedThemeColors["secondaryBackgroundColor"]
+        tertiaryView.backgroundColor = selectedThemeColors["tertiaryBackgroundColor"]
+        
+        //Update label colors:
+        firstOperandLabel.textColor = selectedThemeColors["primaryFontColor"]
+        operatorLabel.textColor = selectedThemeColors["secondaryFontColor"]
+        
+        // Update button colors:
+        for button in numberButtons
+        {
+            button.setTitleColor(selectedThemeColors["primaryFontColor"], for: [])
+        }
+        for button in operationButtons
+        {
+            button.setTitleColor(selectedThemeColors["secondaryFontColor"], for: [])
+        }
+        for button in editButtons
+        {
+            button.setTitleColor(selectedThemeColors["tertiaryFontColor"], for: [])
+        }
     }
     
     // A number button was tapped:
@@ -105,7 +154,7 @@ class ViewController: UIViewController
         print("\(sender.tag)")
         
         // Play a sound:
-        playSound()
+        playSound(ofType: "pop")
         
         // Grab the button value:
         let entry = "\(sender.tag)"
@@ -150,7 +199,7 @@ class ViewController: UIViewController
             print(".")
             
             // Play a sound:
-            playSound()
+            playSound(ofType: "pop")
             
             // If the active number's value is currently "":
             if activeNumber.label.text == ""
@@ -173,7 +222,7 @@ class ViewController: UIViewController
         print("±")
         
         // Play a sound:
-        playSound()
+        playSound(ofType: "pop")
         
         // If the active number is the result:
         if activeNumber == result
@@ -196,7 +245,7 @@ class ViewController: UIViewController
     @IBAction func operatorButtonTapped(_ sender: UIButton)
     {
         // Play a sound:
-        playSound()
+        playSound(ofType: "pop")
         
         // Stores a string of the operator:
         var operation = ""
@@ -232,8 +281,14 @@ class ViewController: UIViewController
             return
         }
         
-        // If the active number is the result:
-        if activeNumber == result
+        // If the active number is the first operand:
+        if activeNumber == firstOperand
+        {
+            // Clean up the first operand:
+            firstOperand.cleanUp()
+        }
+            // Otherwise, if the active number is the result:
+        else if activeNumber == result
         {
             // Save the value of the result:
             let tempResult = resultLabel.text
@@ -245,11 +300,13 @@ class ViewController: UIViewController
             activeNumber.label.text = tempResult
         }
         
-        // Clean up the first operand:
-        firstOperand.cleanUp()
-        
         // Update activeNumber:
         activeNumber = secondOperand
+        
+        if activeNumber.label.text == ""
+        {
+            activeNumber.reset(withValue: "0")
+        }
         
         // Update the operator label:
         operatorLabel.text = operation
@@ -259,7 +316,7 @@ class ViewController: UIViewController
     @IBAction func equalsButtonTapped(_ sender: Any)
     {
         // Play a sound:
-        playSound()
+        playSound(ofType: "toot")
         
         // Stores results of calculation:
         var tempResult = 0.0
@@ -268,16 +325,23 @@ class ViewController: UIViewController
         var resultString = ""
         
         // If the active number is the first operand:
-        if activeNumber == firstOperand
+        if operatorLabel.text == ""
         {
             // Set the result equal to the first operand:
             resultString = firstOperand.label.text!
         }
-            // Otherwise, if the active number is the second operand:
-        else if activeNumber == secondOperand
+            // Otherwise:
+        else
         {
-            // Clean up the second operand:
-            secondOperand.cleanUp()
+            if activeNumber == secondOperand
+            {
+                // Clean up the second operand:
+                secondOperand.cleanUp()
+            }
+            else if activeNumber == result
+            {
+                firstOperand.label.text = activeNumber.label.text
+            }
             
             // Perform calculation:
             switch mathOp
@@ -314,12 +378,6 @@ class ViewController: UIViewController
                     resultString = "\(tempResult)"
                 }
             }
-        }
-            // Otherwise, if the active number is the result:
-        else if activeNumber == result
-        {
-            // Move result up to first operand and repeat the last operation:
-            // ...
         }
         
         // Update activeNumber:
@@ -371,7 +429,7 @@ class ViewController: UIViewController
     @IBAction func editButtonTapped(_ sender: UIButton)
     {
         // Play a sound:
-        playSound()
+        playSound(ofType: "pop")
         
         // If the active number is the result:
         if activeNumber == result
@@ -387,7 +445,7 @@ class ViewController: UIViewController
             {
             // DELETE:
             case 0:
-                // If the second operand is "0":
+                // If the second operand is active and equal to "0":
                 if activeNumber == secondOperand && activeNumber.label.text == "0"
                 {
                     // Reset the second operand:
@@ -412,8 +470,8 @@ class ViewController: UIViewController
                     // Remove last character:
                     activeNumber.label.text = String(activeNumber.label.text!.characters.dropLast())
                     
-                    // If the active number is empty:
-                    if activeNumber.label.text == ""
+                    // If the active number is empty or just a "-":
+                    if activeNumber.label.text == "" || activeNumber.label.text == "-"
                     {
                         // Revert to "0":
                         activeNumber.label.text = "0"
@@ -460,13 +518,22 @@ class ViewController: UIViewController
     }
     
     // Play a sound file:
-    func playSound()
+    func playSound(ofType type: String)
     {
-        let audioPath = Bundle.main.path(forResource: popSounds[randomIndex(forArray: popSounds)], ofType: "wav")
+        var audioPath : String!
+        
+        if type == "pop"
+        {
+            audioPath = Bundle.main.path(forResource: popSounds[randomIndex(forArray: popSounds)], ofType: "wav")
+        }
+        else if type == "toot"
+        {
+            audioPath = Bundle.main.path(forResource: tootSounds[randomIndex(forArray: tootSounds)], ofType: "wav")
+        }
         
         do
         {
-            try audioPlayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath!))
+            try audioPlayer = AVAudioPlayer(contentsOf: URL(fileURLWithPath: audioPath))
             
             audioPlayer.play()
         }
