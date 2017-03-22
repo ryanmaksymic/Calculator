@@ -8,7 +8,7 @@
 
 import UIKit
 
-// Blue theme colours:
+// Blue theme colors:
 let blueThemeColors = [
     "primaryBackgroundColor" : UIColor(colorLiteralRed: 137/255.0, green: 165/255.0, blue: 189/255.0, alpha: 1.0),
     "secondaryBackgroundColor": UIColor(colorLiteralRed: 108/255.0, green: 149/255.0, blue: 191/255.0, alpha: 1.0),
@@ -19,7 +19,7 @@ let blueThemeColors = [
     "tertiaryFontColor" : UIColor(colorLiteralRed: 255/255.0, green: 141/255.0, blue: 93/255.0, alpha: 1.0)
 ]
 
-// Orange theme colours:
+// Orange theme colors:
 let orangeThemeColors = [
     "primaryBackgroundColor" : UIColor(colorLiteralRed: 255/255.0, green: 243/255.0, blue: 153/255.0, alpha: 1.0),
     "secondaryBackgroundColor": UIColor(colorLiteralRed: 255/255.0, green: 181/255.0, blue: 130/255.0, alpha: 1.0),
@@ -69,18 +69,18 @@ class SettingsViewController: UIViewController
             themeSelector.selectedSegmentIndex = 1
         }
         
-        // Update the theme colour:
+        // Update the theme color:
         updateTheme()
     }
     
     // Theme selector segmented control changed:
     @IBAction func themeChanged(_ sender: Any)
     {
-        // Update the theme colours:
+        // Update the theme colors:
         updateTheme()
     }
     
-    // Update the theme colours:
+    // Update the theme colors:
     func updateTheme()
     {
         // If Blue theme selected:
@@ -102,12 +102,12 @@ class SettingsViewController: UIViewController
             UserDefaults.standard.set("Orange", forKey: "theme")
         }
         
-        // Update view colours:
+        // Update view colors:
         view.backgroundColor = selectedThemeColors["primaryBackgroundColor"]
         secondaryView.backgroundColor = selectedThemeColors["secondaryBackgroundColor"]
         tertiaryView.backgroundColor = selectedThemeColors["tertiaryBackgroundColor"]
         
-        // Update text colours:
+        // Update text colors:
         themeSelector.tintColor = selectedThemeColors["primaryFontColor"]
         secondaryFontLabel.textColor = selectedThemeColors["secondaryFontColor"]
         tertiaryFontLabel.textColor = selectedThemeColors["tertiaryFontColor"]

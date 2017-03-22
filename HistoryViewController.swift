@@ -14,6 +14,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
     // Table:
     @IBOutlet weak var table: UITableView!
     
+    // Clear history button:
+    @IBOutlet weak var clearHistoryButton: UIButton!
+    
     // Array storing arrays of calculation data strings – [firstOperand, operation, secondOperand, result, fact]:
     var calculations = [[String]]()
     
@@ -75,6 +78,20 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    // View will appear:
+    override func viewWillAppear(_ animated: Bool)
+    {
+        // Update view background colors:
+        view.backgroundColor = selectedThemeColors["secondaryBackgroundColor"]
+        
+        // Update button color:
+        clearHistoryButton.setTitleColor(selectedThemeColors["tertiaryFontColor"], for: [])
+        
+        // Update table colors:
+        table.backgroundColor = selectedThemeColors["primaryBackgroundColor"]
+        table.separatorColor = selectedThemeColors["tertiaryBackgroundColor"]
+    }
+    
     // Number of rows in section:
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -88,6 +105,9 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Create cell object from HistoryTableViewCell class:
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! HistoryTableViewCell
         
+        // Set cell background color:
+        cell.backgroundColor = selectedThemeColors["primaryBackgroundColor"]
+        
         // Index allows for results to be displayed in reverse chronological order:
         let index = calculations.count - indexPath.row - 1
         
@@ -100,6 +120,7 @@ class HistoryViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // Update labels:
         cell.operandsLabel.text = "\(firstOperand) \(operation) \(secondOperand)"
+        cell.operandsLabel.textColor = selectedThemeColors["primaryFontColor"]
         cell.resultLabel.text = result
         cell.factLabel.text = fact
         

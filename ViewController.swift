@@ -56,10 +56,6 @@ class ViewController: UIViewController
     // Audio player:
     var audioPlayer = AVAudioPlayer()
     
-    // Arrays of audio file names:
-    let popSounds = ["pop1", "pop2", "pop3", "pop4", "pop5", "pop6", "pop7", "pop8", "pop9", "pop10", "pop11"]
-    let tootSounds = ["toot1", "toot2"]
-    
     
     // View did load:
     override func viewDidLoad()
@@ -102,6 +98,9 @@ class ViewController: UIViewController
         
         // Clear the display:
         reset()
+        
+        // Generate a random welcome message:
+        generateRandomWelcomeMessage()
     }
     
     // View will appear:
@@ -395,7 +394,16 @@ class ViewController: UIViewController
         else
         {
             // Update factLabel:
-            factLabel.text = "Whoa! You calculated the number \(resultString)! You must feel like a really cool person!"
+            if tempResult > 355
+            {
+                let tempFactResult = tempResult/457.0
+                
+                factLabel.text = "If you stacked up \(tempFactResult) CN Towers, they'd be \(tempResult) meters tall! Yowza!"
+            }
+            else
+            {
+                factLabel.text = "Whoa! You calculated the number \(resultString)! You must feel like a really cool person!"
+            }
         }
         
         // Fade in factLabel:
@@ -436,6 +444,9 @@ class ViewController: UIViewController
         {
             // Reset the calculator:
             reset()
+            
+            // Generate a random welcome message:
+            generateRandomWelcomeMessage()
         }
             // Otherwise:
         else
@@ -520,6 +531,11 @@ class ViewController: UIViewController
     // Play a sound file:
     func playSound(ofType type: String)
     {
+        // Arrays of audio file names:
+        let popSounds = ["pop1", "pop2", "pop3", "pop4", "pop5", "pop6", "pop7", "pop8", "pop9", "pop10", "pop11"]
+        let tootSounds = ["toot1", "toot2"]
+        
+        // Audio file path name:
         var audioPath : String!
         
         if type == "pop"
@@ -561,8 +577,8 @@ class ViewController: UIViewController
         // Update activeNumber:
         activeNumber = firstOperand
         
-        // Generate a random
-        generateRandomWelcomeMessage()
+        // Generate a random welcome message:
+        //generateRandomWelcomeMessage()
     }
     
     // Generate a random welcome message:
@@ -573,7 +589,6 @@ class ViewController: UIViewController
             "Hey! Looking to calculate something?\nJust start tapping numbers, bucko.",
             "Did you know that the first calculator was invented by a 12-year-old child in rural Estonia? Just kidding, I have no idea.",
             "\"Calculator\" comes from the Latin \"calculatus\", which means \"to reckon, compute\".\nAccording to Google. Probably true.",
-            "Numbers are the language of robot love.",
             "What? You don't carry your TI-83 with you everywhere you go? Fine, you can use this app.",
             "Pro tip: Don't let the number pad deceive you. This app can NOT be used to make phone calls.",
             "A million calculators isn't cool. Know what's cool? A BILLION calculators.",
@@ -596,7 +611,7 @@ class ViewController: UIViewController
         
         // Fade in factLabel:
         factLabel.alpha = 0.0
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: 1.0, animations: {
             self.factLabel.alpha = 1.0
         }, completion: nil)
     }

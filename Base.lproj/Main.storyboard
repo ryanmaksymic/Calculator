@@ -390,6 +390,7 @@
                                 <rect key="frame" x="0.0" y="154" width="320" height="414"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="161" id="xNx-vA-Y3L" customClass="HistoryTableViewCell" customModule="Calculator" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="161"/>
@@ -420,7 +421,6 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.53725490196078429" green="0.6470588235294118" blue="0.74117647058823533" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="factLabel" destination="OVf-v1-8jX" id="lZV-0s-Jal"/>
@@ -458,6 +458,7 @@
                         <color key="backgroundColor" red="0.42352941176470588" green="0.58431372549019611" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="clearHistoryButton" destination="cKL-AD-Qdw" id="cRU-lw-IkZ"/>
                         <outlet property="table" destination="qY5-7L-GJy" id="R0x-bw-G8m"/>
                     </connections>
                 </viewController>
