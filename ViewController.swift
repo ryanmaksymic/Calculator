@@ -385,25 +385,13 @@ class ViewController: UIViewController
         // Update resultLabel:
         activeNumber.label.text = resultString
         
-        // Generate fact:
-        if resultString == "69"
+        if tempResult > 1
         {
-            // Update factLabel:
-            factLabel.text = "\(resultString)! Up top, my brotha!"
+            generateFact(forNumber: tempResult)
         }
         else
         {
-            // Update factLabel:
-            if tempResult > 355
-            {
-                let tempFactResult = tempResult/457.0
-                
-                factLabel.text = "If you stacked up \(tempFactResult) CN Towers, they'd be \(tempResult) meters tall! Yowza!"
-            }
-            else
-            {
-                factLabel.text = "Whoa! You calculated the number \(resultString)! You must feel like a really cool person!"
-            }
+            factLabel.text = "Whoa! You calculated the number \(resultString)! You must feel like a really cool person!"
         }
         
         // Fade in factLabel:
@@ -431,6 +419,57 @@ class ViewController: UIViewController
         {
             print("Error saving calculation data!")
         }
+    }
+    
+    func generateFact(forNumber number: Double)
+    {
+        let newNumber = floor(number)
+        
+        let newString = String(format: "%.0f", newNumber)
+        
+        // Generate URL using number:
+        let url = URL(string: "http://numbersapi.com/\(newString)?json")!
+        
+        print("URL: \(url)")
+        
+        // Task that retrieves contents of the given URL:
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            // If there is an error:
+            if error != nil
+            {
+                print("Error loading URL!")
+            }
+                // Otherwise:
+            else
+            {
+                // If data makes sense:
+                if let urlContent = data
+                {
+                    do
+                    {
+                        // Try pulling JSON data from URL content:
+                        let jsonResult = try JSONSerialization.jsonObject(with: urlContent, options: .mutableContainers) as AnyObject
+                        
+                        print(jsonResult["text"])
+                        
+                        DispatchQueue.main.sync(execute: {
+                            
+                            let fact = jsonResult["text"] as! String
+                            
+                            self.factLabel.text = fact
+                        })
+                    }
+                    catch
+                    {
+                        print("Error retrieving JSON data!")
+                    }
+                }
+            }
+        }
+        
+        // Run the task:
+        task.resume()
     }
     
     // An edit button was tapped:
